@@ -131,10 +131,10 @@ always @(posedge CLK100MHZ or negedge TRST_N) begin
         if(core_haltreq) begin
             core_halt <= 1'b1;
             core_resume <= 1'b0;
-        end else if(core_resumereq) begin
+        end else if(core_resumereq & core_halt) begin
             core_halt <= 1'b0;
             core_resume <= 1'b1;
-        end else if(!core_resumereq) begin
+        end else if(!core_resumereq & core_resume) begin
             core_halt <= 1'b0;
             core_resume <= 1'b0;
         end
